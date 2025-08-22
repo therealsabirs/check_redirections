@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>URL Check Results</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      color: white;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+    th, td {
+      padding: 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      text-align: center;
+    }
+    th {
+      background: rgba(0,0,0,0.6);
+      color: #FFD700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    tr {
+      transition: 0.3s;
+    }
+    tr:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.01);
+    }
+    .status-success {
+      background: #28a745;
+      padding: 6px 12px;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      animation: pop 0.5s ease;
+    }
+    .status-fail {
+      background: #dc3545;
+      padding: 6px 12px;
+      border-radius: 20px;
+      color: white;
+      font-weight: bold;
+      animation: pop 0.5s ease;
+    }
+    .download-btn {
+      display: block;
+      width: fit-content;
+      margin: 30px auto;
+      background: #ff9800;
+      padding: 12px 24px;
+      border-radius: 25px;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .download-btn:hover {
+      background: #e68900;
+      transform: scale(1.1);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    @keyframes pop {
+      0% { transform: scale(0.8); opacity: 0;}
+      100% { transform: scale(1); opacity: 1;}
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 URL Check Results</h1>
+
+  <table>
+    <tr>
+      <th>Actual URL</th>
+      <th>Expected URL</th>
+      <th>Status Code (Actual)</th>
+      <th>Status Code (Expected)</th>
+      <th>Redirected To</th>
+      <th>Final Status</th>
+    </tr>
+    {% for row in results %}
+    <tr>
+      <td>{{ row.actual }}</td>
+      <td>{{ row.expected }}</td>
+      <td>{{ row.status_actual }}</td>
+      <td>{{ row.status_expected }}</td>
+      <td>{{ row.redirect_to }}</td>
+      <td>
+        {% if "Success" in row.final_status %}
+          <span class="status-success">✅ Success</span>
+        {% else %}
+          <span class="status-fail">❌ Failed</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <a class="download-btn" href="/download/{{ download_file }}">⬇ Download Excel</a>
+</body>
+</html>

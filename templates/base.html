@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask App{% endblock %}</title>
+    <style>
+        /* ---------- Global Layout ---------- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #141E30, #243B55);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* Container Box */
+        .container {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-in-out;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        /* Headings */
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* ---------- Navbar ---------- */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: #007BFF;
+            color: white;
+            transition: 0.3s;
+        }
+        nav a:hover {
+            background: #0056b3;
+        }
+
+        /* ---------- Forms ---------- */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="file"] {
+            margin: 10px;
+        }
+
+        button, .btn {
+            padding: 10px 20px;
+            background: #007BFF;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover, .btn:hover {
+            background: #0056b3;
+        }
+
+        /* ---------- Tables ---------- */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            text-align: center;
+        }
+        th {
+            background: rgba(0,0,0,0.6);
+            color: #FFD700;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        tr {
+            transition: 0.3s;
+        }
+        tr:hover {
+            background: rgba(255,255,255,0.1);
+            transform: scale(1.01);
+        }
+
+        /* ---------- Status Tags ---------- */
+        .status-success {
+            background: #28a745;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            animation: pop 0.5s ease;
+        }
+        .status-fail {
+            background: #dc3545;
+            padding: 6px 12px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            animation: pop 0.5s ease;
+        }
+
+        /* ---------- Download Button ---------- */
+        .download-btn {
+            display: block;
+            width: fit-content;
+            margin: 30px auto;
+            background: #ff9800;
+            padding: 12px 24px;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .download-btn:hover {
+            background: #e68900;
+            transform: scale(1.1);
+        }
+
+        /* ---------- Animations ---------- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pop {
+            0% { transform: scale(0.8); opacity: 0;}
+            100% { transform: scale(1); opacity: 1;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>{% block header %}My Flask App{% endblock %}</h2>
+            <nav>
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('results') }}">Results</a>
+            </nav>
+        </header>
+
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>
